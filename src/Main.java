@@ -38,6 +38,8 @@ public class Main {
         while( ( ch = fileReader.read()) != -1)
         {
             char c = (char)ch;
+            if(c == '\r' || c == '\n')
+                return;
             if(!fun(c))
                 return;
         }
