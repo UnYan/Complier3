@@ -38,31 +38,34 @@ public class Main {
         while( ( ch = fileReader.read()) != -1)
         {
             char c = (char)ch;
-            int result = cmp(c);
-            if(result == 0){
-                System.out.println("E");
-                return ;
-            }
-            else if(result == -1 || result == 2){
-                System.out.println("I" + c);
-                StringBuffer stringBuffer = new StringBuffer(stack);
-                stringBuffer.append(c);
-                stack = stringBuffer.toString();
-            }
-            else {
-                while(statute()){
-                }
-                StringBuffer stringBuffer = new StringBuffer(stack);
-                stringBuffer.append(c);
-                stack = stringBuffer.toString();
-                System.out.println("I" + c);
-            }
+            if(!fun(c))
+                return;
         }
         while(statute()){
         }
-        if(!"#E".equals(stack))
+        if(!"#N".equals(stack))
             System.out.println("RE");
 
+    }
+
+    public static boolean fun(char c){
+        int result = cmp(c);
+        if(result == 0){
+            System.out.println("E");
+            return false;
+        }
+        else if(result == -1 || result == 2){
+            System.out.println("I" + c);
+            StringBuffer stringBuffer = new StringBuffer(stack);
+            stringBuffer.append(c);
+            stack = stringBuffer.toString();
+        }
+        else {
+            statute();
+            boolean k = fun(c);
+            return k;
+        }
+        return true;
     }
 
     public static boolean statute(){
@@ -71,9 +74,9 @@ public class Main {
                 String s = stack.substring(stack.length() - j,stack.length());
                 for(Rule rule : ruleList){
                     if(rule.rule.equals(s)){
-                        if(s.equals("i") || s.equals("E+T") || s.equals("T*F") || s.equals("(E)"))
+                        if(s.equals("i") || s.equals("N+N") || s.equals("N*N") || s.equals("(N)"))
                             System.out.println("R");
-                        stack = stack.substring(0,stack.length() - j) + rule.Vn;
+                        stack = stack.substring(0,stack.length() - j) + "N";
                         return true;
                     }
                 }
@@ -86,6 +89,8 @@ public class Main {
         if(!VtList.contains(c))
             return 0;
         char vt = getLastVt();
+        if(vt == '#')
+            return -1;
         Vt up = new Vt();
         Vt in = new Vt();
         for(Vt k : vtList){
@@ -94,8 +99,6 @@ public class Main {
             if(k.vt == vt)
                  up = k;
         }
-        if(up.i == 0 && stack.length()>=2)
-            return 0;
         return a[up.i][in.i];
     }
 
@@ -137,9 +140,7 @@ public class Main {
 
     public static void insertRules(){
         String[] rules = {
-                "E=>E+T|T",
-                "T=>T*F|F",
-                "F=>(E)|i"
+                "N=>N+N|N*N|(N)|i"
         };
         for(String rule : rules)
             analyzeRule(rule);
