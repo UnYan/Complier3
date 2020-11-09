@@ -21,11 +21,11 @@ public class Main {
     public static String stack = "#";
     public static int[][] a = {
             {0,-1,-1,-1,-1,-1},
-            {1,0,0,1,1,1},
-            {1,-1,-1,2,-1,-1},
-            {1,0,2,1,1,1},
-            {1,-1,-1,1,1,-1},
-            {1,-1,-1,1,1,1}
+            {0,0,0,1,1,1},
+            {0,-1,-1,2,-1,-1},
+            {0,0,1,0,1,1},
+            {0,-1,-1,1,1,-1},
+            {0,-1,-1,1,1,1}
     };
 
     public static void main(String[] args) throws IOException {
@@ -89,8 +89,8 @@ public class Main {
         if(!VtList.contains(c))
             return 0;
         char vt = getLastVt();
-        if(vt == '#')
-            return -1;
+//        if(vt == '#')
+//            return -1;
         Vt up = new Vt();
         Vt in = new Vt();
         for(Vt k : vtList){
@@ -99,6 +99,8 @@ public class Main {
             if(k.vt == vt)
                  up = k;
         }
+//        if(up.i == 0)
+//            return 0;
         return a[up.i][in.i];
     }
 
