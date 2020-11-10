@@ -35,18 +35,23 @@ public class Main {
         insertRules();
 //        test();
          int ch = 0;
+         String s = new String();
         while( ( ch = fileReader.read()) != -1)
         {
             char c = (char)ch;
+            s+=c;
             if(c == '\r' || c == '\n')
                 break;
-            if(!fun(c))
+            if(!fun(c)) {
+                System.out.println("s" + s);
                 return;
+            }
         }
         while(statute()){
         }
         if(!"#N".equals(stack))
             System.out.println("RE");
+        System.out.println("s" + s);
 
     }
 
@@ -58,14 +63,11 @@ public class Main {
         }
         else if(result == -1 || result == 2){
             System.out.println("I" + c);
-            StringBuffer stringBuffer = new StringBuffer(stack);
-            stringBuffer.append(c);
-            stack = stringBuffer.toString();
+            stack = stack + c;
         }
         else {
             statute();
-            boolean k = fun(c);
-            return k;
+            return fun(c);
         }
         return true;
     }
