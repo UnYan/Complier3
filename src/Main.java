@@ -69,7 +69,7 @@ public class Main {
             stack = stack + c;
         }
         else {
-            if (!statute() && c!='#') {
+            if (!statute()) {
                 System.out.println("RE");
                 return false;
             }
