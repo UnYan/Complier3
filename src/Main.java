@@ -40,18 +40,19 @@ public class Main {
         {
             char c = (char)ch;
             s+=c;
-//            if(c == '\r' || c == '\n')
-//                break;
-//            if(!fun(c)) {
-//                System.out.println("s" + s);
-//                return;
-//            }
+            if(c == '\r' || c == '\n')
+                break;
+            if(!fun(c)) {
+                return;
+            }
         }
-//        while(statute()){
-//        }
-//        if(!"#N".equals(stack))
-//            System.out.println("RE");
-        System.out.println("s" + s);
+        if(!fun('#')) {
+            return;
+        }
+        while(statute()){
+        }
+        if(!"#N".equals(stack))
+            System.out.println("RE");
 
     }
 
@@ -66,7 +67,10 @@ public class Main {
             stack = stack + c;
         }
         else {
-            statute();
+            if (!statute()) {
+                System.out.println("RE");
+                return false;
+            }
             return fun(c);
         }
         return true;
