@@ -20,12 +20,12 @@ public class Main {
 
     public static String stack = "#";
     public static int[][] a = {
-            {0,-1,-1,-1,-1,-1},
-            {0,0,0,1,1,1},
+            {-1,-1,-1,-1,-1,-1},
+            {1,0,0,1,1,1},
             {0,-1,-1,2,-1,-1},
-            {0,0,0,1,1,1},
-            {0,-1,-1,1,1,-1},
-            {0,-1,-1,1,1,1}
+            {1,0,0,1,1,1},
+            {1,-1,-1,1,1,-1},
+            {1,-1,-1,1,1,1}
     };
 
     public static void main(String[] args) throws IOException {
@@ -63,11 +63,13 @@ public class Main {
             return false;
         }
         else if(result == -1 || result == 2){
+            if(c == '#')
+                return true;
             System.out.println("I" + c);
             stack = stack + c;
         }
         else {
-            if (!statute()) {
+            if (!statute() && c!='#') {
                 System.out.println("RE");
                 return false;
             }
@@ -179,6 +181,7 @@ public class Main {
         VtList.add('(');
         VtList.add(')');
         VtList.add('i');
+        VtList.add('#');
     }
 
     public static void analyzeRule(String rule){
