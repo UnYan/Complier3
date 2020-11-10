@@ -39,7 +39,7 @@ public class Main {
         {
             char c = (char)ch;
             if(c == '\r' || c == '\n')
-                return;
+                break;
             if(!fun(c))
                 return;
         }
